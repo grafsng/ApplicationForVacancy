@@ -30,10 +30,21 @@ namespace ApplicationForVacancy
             services.AddControllers();
             //Регистрация сервиса
             services.AddTransient<IAbstract, Entity>();
+            //Добавление сваггера
+            services.AddSwaggerGen();
         }
+    
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApplicationForVacancy");
+                c.RoutePrefix = string.Empty;
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,3 +60,8 @@ namespace ApplicationForVacancy
         }
     }
 }
+
+
+       
+
+    

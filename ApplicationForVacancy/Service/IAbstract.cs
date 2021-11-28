@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationForVacancy.Models;
 
 namespace ApplicationForVacancy.Service
 {
-    interface IAbstract
+    public interface IAbstract
     {
+        Task<Product> PostByNameAsync(string name);
+        Task<Product> GetByIdAsync(Guid id);
+        Task<Product> PostAddAsync(Product product);
+        Task<Product> PutUpdAsync(Product product);
+        Task<Product> DeleteAsync(Guid id);
+
     }
 }
