@@ -1,13 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ApplicationForVacancy.Context;
+using ApplicationForVacancy.CustomMiddlewares;
 using ApplicationForVacancy.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -37,8 +33,9 @@ namespace ApplicationForVacancy
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //подключение компонента сваггера
             app.UseSwagger();
-
+            //облегчаем вызов сваггера
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApplicationForVacancy");
@@ -52,6 +49,8 @@ namespace ApplicationForVacancy
 
             app.UseRouting();
 
+            //подключение компонента, глобально обрабатывающего исключения методов сервиса
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
             //подключаем маршрутизацию на контроллеры
             app.UseEndpoints(endpoints =>
             {
