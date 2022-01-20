@@ -17,6 +17,8 @@ namespace ApplicationForVacancy.Service
         }
         public async Task<Product> PostByNameAsync(string name)
         {
+            throw new NotFoundException("ggg");
+            
             var product = await db.Product.FirstOrDefaultAsync(p=>p.Name==name);
             if (product == null)
             {

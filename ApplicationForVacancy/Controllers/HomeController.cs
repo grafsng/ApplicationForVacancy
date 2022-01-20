@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using ApplicationForVacancy.CustomExceptionClasses;
 using ApplicationForVacancy.Models;
 using ApplicationForVacancy.Service;
 
 namespace ApplicationForVacancy.Controllers
 {
+    [ApiController]
     [Route("api/v1")]
     public class HomeController : Controller
     {
@@ -18,6 +21,8 @@ namespace ApplicationForVacancy.Controllers
         [HttpPost("product/{name}")]
         public async Task<Product> PostNameAsync(string name)
         {
+
+            throw new NotFoundException("FF");
            return await service.PostByNameAsync(name);
         }
         
